@@ -5,11 +5,17 @@ import { FC, ReactNode, createContext, useState } from 'react'
 interface ThemeProviderProps {
   children: ReactNode
 }
+export interface ThemeContextType {
+  toggle: () => void
+  mode: modeType
+}
 
-export const ThemeContext = createContext<any>(null)
+type modeType = 'light' | 'dark'
+
+export const ThemeContext = createContext<ThemeContextType | null>(null)
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [mode, setMode] = useState('dark')
+  const [mode, setMode] = useState<modeType>('dark')
 
   const toggle = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'))
