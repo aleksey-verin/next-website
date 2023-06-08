@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { FC } from 'react'
+import styles from './Navbar.module.css'
 
 const links = [
   {
@@ -38,14 +39,17 @@ interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
   return (
-    <div>
-      <Link href='/'>Logo</Link>
-      <div>
+    <div className={styles.container}>
+      <Link href='/' className={styles.logo}>
+        Logo
+      </Link>
+      <div className={styles.links}>
         {links.map((link) => (
-          <Link key={link.id} href={link.url}>
+          <Link key={link.id} href={link.url} className={styles.link}>
             {link.title}
           </Link>
         ))}
+        <button className={styles.logout}>Log out</button>
       </div>
     </div>
   )
