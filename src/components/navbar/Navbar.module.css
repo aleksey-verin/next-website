@@ -17,9 +17,11 @@
 }
 
 .logout {
-  padding: 5px;
+  padding: 10px;
   border: none;
-  background-color: #53c28b;
+  font-size: inherit;
+  background-color: #4881fb;
+  color: #fff;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 10px;
 }
