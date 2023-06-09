@@ -31,18 +31,12 @@ const BlogPost = async ({ params }: BlogPostProps) => {
           <h1 className={styles.title}>{data.title}</h1>
           <p className={styles.desc}>{data.body}</p>
           <div className={styles.author}>
-            <Image
-              src='/public/image2.png'
-              alt=''
-              width={40}
-              height={40}
-              className={styles.avatar}
-            />
+            <Image src='/image2.png' alt='' width={40} height={40} className={styles.avatar} />
             <span className={styles.username}>{data.username}</span>
           </div>
         </div>
         <div className={styles.imageContainer}>
-          <Image src='/public/image3.png' alt='' fill={true} className={styles.image} />
+          <Image src='/image3.png' alt='' fill={true} className={styles.image} />
         </div>
       </div>
       <div className={styles.content}>
