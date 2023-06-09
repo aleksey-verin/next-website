@@ -2,23 +2,42 @@ import { FC } from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
+import PostsType from './page'
 
-interface BlogProps {}
+interface PostsType {
+  userId: number
+  id: number
+  title: string
+  body: string
+}
 
-const Blog: FC<BlogProps> = ({}) => {
+async function getData() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+    cache: 'no-store',
+  })
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+
+  return res.json()
+}
+
+const Blog = async ({}) => {
+  const data: PostsType[] = await getData()
+
   return (
     <div className={styles.mainContainer}>
-      {/* {data.map((item) => ( */}
-      <Link href={`/blog/1233`} className={styles.container}>
-        <div className={styles.imageContainer}>
-          <Image src='' alt='' width={400} height={250} className={styles.image} />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>H1</h1>
-          <p className={styles.desc}>p tag</p>
-        </div>
-      </Link>
-      {/* ))} */}
+      {data.map((item) => (
+        <Link key={item.id} href={`/blog/1233`} className={styles.container}>
+          <div className={styles.imageContainer}>
+            <Image src='/image1.png' alt='' width={400} height={250} className={styles.image} />
+          </div>
+          <div className={styles.content}>
+            <h1 className={styles.title}>{item.title}</h1>
+            <p className={styles.desc}>p tag</p>
+          </div>
+        </Link>
+      ))}
     </div>
   )
 }
