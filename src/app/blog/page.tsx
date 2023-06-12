@@ -5,14 +5,15 @@ import Image from 'next/image'
 import PostsType from './page'
 
 interface PostsType {
-  userId: number
-  id: number
+  _id: string
+  // id: number
   title: string
-  body: string
+  desc: string
+  img: string
 }
 
 async function getData() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+  const res = await fetch('http://localhost:3000/api/posts', {
     cache: 'no-store',
   })
   if (!res.ok) {
@@ -28,13 +29,13 @@ const Blog = async ({}) => {
   return (
     <div className={styles.mainContainer}>
       {data.map((item) => (
-        <Link key={item.id} href={`/blog/1233`} className={styles.container}>
+        <Link key={item._id} href={`/blog/${item._id}`} className={styles.container}>
           <div className={styles.imageContainer}>
-            <Image src='/image1.png' alt='' width={400} height={250} className={styles.image} />
+            <Image src={item.img} alt='' width={400} height={250} className={styles.image} />
           </div>
           <div className={styles.content}>
             <h1 className={styles.title}>{item.title}</h1>
-            <p className={styles.desc}>p tag</p>
+            <p className={styles.desc}>{item.desc}</p>
           </div>
         </Link>
       ))}
